@@ -197,7 +197,22 @@ namespace Notepad
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            line = 1 + richTextBox1.GetLineFromCharIndex(richTextBox1.GetFirstCharIndexOfCurrentLine());
+            column = 1 + richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexOfCurrentLine();
+            richTextBox1.ForeColor = Color.Black;
 
+            toolStripStatusLabel1.Text = string.Format("ln {0} cl {1}", line, column);
+
+
+            if (richTextBox1.Text.Length > 0)
+            {
+                toolStripButton8.Enabled = toolStripButton5.Enabled = true;
+
+            }
+            if (line > 1)
+            {
+                goToToolStripMenuItem.Enabled = true;
+            }
         }
 
         private void findToolStripMenuItem_Click(object sender, EventArgs e)
@@ -365,7 +380,8 @@ namespace Notepad
         {
             line = 1 + richTextBox1.GetLineFromCharIndex(richTextBox1.GetFirstCharIndexOfCurrentLine());
             column = 1 + richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexOfCurrentLine();
-
+            richTextBox1.ForeColor = Color.Black;
+            MessageBox.Show("the cussor changed ");
             toolStripStatusLabel1.Text = string.Format("ln {0} cl {1}", line, column);
         }
 
@@ -399,6 +415,11 @@ namespace Notepad
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.Font = new Font(richTextBox1.Font.Name, 12);
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
