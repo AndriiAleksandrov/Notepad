@@ -25,7 +25,7 @@ namespace Notepad
                     save.PerformClick();
                     richTextBox1.Clear();
                     fname = string.Empty;
-                    this.Text = "Untitled - Notepad";
+                    this.Text = "Untitled";
 
                 }
                 else if (cl == DialogResult.No)// This block runs when you click on the no option on message box. 
@@ -33,7 +33,7 @@ namespace Notepad
                 {
                     richTextBox1.Clear();
                     fname = string.Empty;
-                    this.Text = "Untitled - Notepad";
+                    this.Text = "Untitled";
                 }
 
 
@@ -44,7 +44,7 @@ namespace Notepad
             {
                 richTextBox1.Clear();
                 fname = string.Empty;
-                this.Text = "Untitled - Notepad";
+                this.Text = "Untitled";
             }
         }
 
@@ -293,6 +293,79 @@ namespace Notepad
             }
 
             findOnWebToolStripMenuItem.Enabled = convertCaseToToolStripMenuItem.Enabled = deleteToolStripMenuItem.Enabled = cutToolStripMenuItem.Enabled = copyToolStripMenuItem.Enabled = richTextBox1.SelectedText.Length > 0;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.WordWrap = !richTextBox1.WordWrap;// Word wrap is a property of rich textbox which return true and false. 
+            statusBarToolStripMenuItem.Enabled = !richTextBox1.WordWrap;
+            if (richTextBox1.WordWrap == true)
+            {
+                wordWrapToolStripMenuItem.Checked = true;
+                statusBarToolStripMenuItem.Checked = false;
+                statusStrip1.Visible = false;
+            }
+            else
+            {
+                statusBarToolStripMenuItem.Checked = true;
+                statusStrip1.Visible = true;
+                wordWrapToolStripMenuItem.Checked = false;
+            }
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult ft;
+            ft = fontDialog1.ShowDialog();
+            if (ft == DialogResult.OK)// If we click on the ok button oh font dialog 
+            {
+                richTextBox1.SelectionFont = fontDialog1.Font;// set the font of rich textbox text same as selected in the Fnt dialog. 
+            }
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult cl;
+
+            cl = colorDialog1.ShowDialog();
+            if (cl == DialogResult.OK)
+            {
+                richTextBox1.SelectionColor = colorDialog1.Color;
+            }
+        }
+
+        private void statusBarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!wordWrapToolStripMenuItem.Checked)
+            {
+                statusBarToolStripMenuItem.Checked = !statusBarToolStripMenuItem.Checked;
+                if (statusBarToolStripMenuItem.Checked)
+                {
+
+                    statusStrip1.Visible = true;
+
+                }
+                else
+                {
+
+                    statusStrip1.Visible = false;
+                }
+            }
+        }
+
+        int line;
+        int column;
+        private void richTextBox1_CursorChanged(object sender, EventArgs e)
+        {
+            line = 1 + richTextBox1.GetLineFromCharIndex(richTextBox1.GetFirstCharIndexOfCurrentLine());
+            column = 1 + richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexOfCurrentLine();
+
+            toolStrip1.Text = string.Format("ln {0} cl {1}", line, column);
         }
     }
 }
