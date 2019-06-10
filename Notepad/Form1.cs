@@ -51,7 +51,7 @@ namespace Notepad
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-
+            openToolStripMenuItem.PerformClick();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace Notepad
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-
+            save.PerformClick();
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -163,8 +163,6 @@ namespace Notepad
             try
             {
                 PageSetupDialog ps;
-
-                string s;
                 printDocument1.DocumentName = "print document";
                 ps = pageSetupDialog1;
                 ps.AllowMargins = true;
@@ -206,19 +204,9 @@ namespace Notepad
 
             if (richTextBox1.Text.Length > 0)
             {
-                toolStripButton8.Enabled = toolStripButton5.Enabled = true;
+                toolStripButton5.Enabled = true;
 
             }
-            if (line > 1)
-            {
-                goToToolStripMenuItem.Enabled = true;
-            }
-        }
-
-        private void findToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form2 obj = new Form2();
-            obj.Show();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -304,11 +292,10 @@ namespace Notepad
         {
             if (richTextBox1.Modified)
             {
-                replaceToolStripMenuItem.Enabled = findToolStripMenuItem.Enabled = undoToolStripMenuItem.Enabled = true;
-                //       isundo = true;
+                undoToolStripMenuItem.Enabled = true;
             }
 
-            findOnWebToolStripMenuItem.Enabled = convertCaseToToolStripMenuItem.Enabled = deleteToolStripMenuItem.Enabled = cutToolStripMenuItem.Enabled = copyToolStripMenuItem.Enabled = richTextBox1.SelectedText.Length > 0;
+            deleteToolStripMenuItem.Enabled = cutToolStripMenuItem.Enabled = copyToolStripMenuItem.Enabled = richTextBox1.SelectedText.Length > 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -420,6 +407,77 @@ namespace Notepad
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 obj = new AboutBox1();
+            obj.Show();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            newToolStripMenuItem.PerformClick();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Cut();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Copy();
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Paste();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            isundo = !isundo;
+            if (isundo)
+            {
+                richTextBox1.Undo();
+                redoToolStripMenuItem.Enabled = true;
+
+            }
+            else
+            {
+                richTextBox1.Redo();
+            }
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Redo();
+        }
+
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font.Name, richTextBox1.Font.Size, FontStyle.Bold);
+        }
+
+        private void toolStripButton12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font.Name, richTextBox1.Font.Size, FontStyle.Italic);
+        }
+
+        private void toolStripButton13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font.Name, richTextBox1.Font.Size, FontStyle.Underline);
+        }
+
+        private void toolStripButton14_Click(object sender, EventArgs e)
+        {
+            zoomInToolStripMenuItem.PerformClick();
+        }
+
+        private void toolStripButton15_Click(object sender, EventArgs e)
+        {
+            zoomOutToolStripMenuItem.PerformClick();
         }
     }
 }
