@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -365,7 +366,39 @@ namespace Notepad
             line = 1 + richTextBox1.GetLineFromCharIndex(richTextBox1.GetFirstCharIndexOfCurrentLine());
             column = 1 + richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexOfCurrentLine();
 
-            toolStrip1.Text = string.Format("ln {0} cl {1}", line, column);
+            toolStripStatusLabel1.Text = string.Format("ln {0} cl {1}", line, column);
+        }
+
+        float m = 12;
+        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(m < 73)
+            {
+                m = richTextBox1.Font.Size;
+                richTextBox1.Font = new Font(richTextBox1.Font.Name, m + 2);// add 3 on every click until the font size is less than 73 (you can use any value for increment and limit ) 
+            }
+            else if (m <= 70)
+            {
+                zoomInToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m > 7)
+            {
+                m = richTextBox1.Font.Size;
+                richTextBox1.Font = new Font(richTextBox1.Font.Name, m - 2);
+            }
+            else if (m >= 8)
+            {
+                zoomOutToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Font = new Font(richTextBox1.Font.Name, 12);
         }
     }
 }
