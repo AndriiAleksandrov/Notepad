@@ -60,7 +60,7 @@ namespace Notepad
             {
                 if (richTextBox1.Text.Length > 0)
                 {
-                    DialogResult cl = MessageBox.Show("Do you want to save changes in the current file", "My Notepad", MessageBoxButtons.YesNoCancel);
+                    DialogResult cl = MessageBox.Show("Do you want to save changes in the current file", "Notepad", MessageBoxButtons.YesNoCancel);
 
                     if (cl == DialogResult.Yes)
                     {
@@ -72,14 +72,14 @@ namespace Notepad
                     else if (cl == DialogResult.No)
                     {
                         DialogResult res;
-                        openFileDialog1.Filter = "Text File|*.txt|Html file|*.htm|All Files|*."; // set filter for  the file dialod box 
+                        openFileDialog1.Filter = "Text File|*.txt|Html file|*.html|Rich Text Format|*.rtf|All Files|*.*"; // set filter for  the file dialod box 
                         openFileDialog1.FileName = string.Empty;
                         res = openFileDialog1.ShowDialog();//open file dialog box 
                         if (res == DialogResult.OK)
                         {
                             string s = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                             richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-                            this.Text = s + "-Notepad";
+                            this.Text = s + " Notepad";
                             richTextBox1.Modified = false;
                         }
                         fname = saveFileDialog1.FileName;
@@ -88,14 +88,14 @@ namespace Notepad
                 else
                 {
                     DialogResult res;
-                    openFileDialog1.Filter = "Text File|*.txt|Html file|*.htm|All Files|*.";
+                    openFileDialog1.Filter = "Text File|*.txt|Html file|*.html|Rich Text Format|*.rtf|All Files|*.*";
                     openFileDialog1.FileName = string.Empty;
                     res = openFileDialog1.ShowDialog();
                     if (res == DialogResult.OK)
                     {
                         string s = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                         richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-                        this.Text = s + "-Notepad";
+                        this.Text = s + " Notepad";
                         richTextBox1.Modified = false;
                     }
                     fname = saveFileDialog1.FileName;
@@ -107,14 +107,14 @@ namespace Notepad
             else
             {
                 DialogResult res;
-                openFileDialog1.Filter = "Text File|*.txt|Html file|*.htm|All Files|*.";
+                openFileDialog1.Filter = "Text File|*.txt|Html file|*.html|Rich Text Format|*.rtf|All Files|*.*";
                 openFileDialog1.FileName = string.Empty;
                 res = openFileDialog1.ShowDialog();
                 if (res == DialogResult.OK)
                 {
                     string s = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                     richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-                    this.Text = s + "-Notepad";
+                    this.Text = s + " Notepad";
                     richTextBox1.Modified = false;
                 }
                 fname = saveFileDialog1.FileName;
@@ -124,7 +124,7 @@ namespace Notepad
         private void saveAs_Click(object sender, EventArgs e)
         {
             DialogResult res;
-            saveFileDialog1.Filter = "Text File|*.txt|Html file|*.htm|All Files|*.";
+            saveFileDialog1.Filter = "Text File|*.txt|Html file|*.html|Rich Text Format|*.rtf|All Files|*.*";
             res = saveFileDialog1.ShowDialog();
             if (res == DialogResult.OK)
             {
@@ -134,7 +134,7 @@ namespace Notepad
             fname = saveFileDialog1.FileName;
             string name = Path.GetFileNameWithoutExtension(fname);
 
-            this.Text = name + "- Notepad";
+            this.Text = name + " Notepad";
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
